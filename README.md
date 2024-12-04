@@ -397,8 +397,8 @@ The final score will be given according to whether or not the objectives have be
 In this case, the challenge will be evaluated on 1600 (1200 for tasks and 400 for code quality) points which are distributed as follows:
 
 - **Task 1**: 100 points
-- **Task 2**: 300 points
-- **Task 3**: 300 points
+- **Task 2**: 400 points
+- **Task 3**: 200 points
 - **Task 4**: 500 points
 - **Code quality**: 400 points
 
