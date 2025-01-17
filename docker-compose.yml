@@ -8,7 +8,8 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     networks:
       - inditex_network
     restart: always
@@ -24,6 +25,10 @@ services:
     networks:
       - inditex_network
     restart: always
+    healthcheck:
+      test: [ "CMD", 'mysqladmin', 'ping', '-h', 'localhost', '-u', 'root', '-proot' ]
+      timeout: 5s
+      retries: 10
 
 networks:
   inditex_network:
