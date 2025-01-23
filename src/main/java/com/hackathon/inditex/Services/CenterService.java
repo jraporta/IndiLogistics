@@ -9,6 +9,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class CenterService {
@@ -31,5 +33,9 @@ public class CenterService {
         } catch (DataIntegrityViolationException e) {
             throw new InvalidCenterCreationDataException("There is already a logistics center in that position.");
         }
+    }
+
+    public List<Center> getAllCenters() {
+        return centerRepository.findAll();
     }
 }
