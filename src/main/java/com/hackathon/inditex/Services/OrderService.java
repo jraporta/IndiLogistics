@@ -6,6 +6,8 @@ import com.hackathon.inditex.Repositories.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class OrderService {
@@ -19,5 +21,9 @@ public class OrderService {
         order.setStatus("PENDING");
         order.setCoordinates(data.getCoordinates());
         return orderRepository.save(order);
+    }
+
+    public List<Order> getAllOrders() {
+        return orderRepository.findAll();
     }
 }
