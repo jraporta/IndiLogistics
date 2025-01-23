@@ -26,4 +26,10 @@ public class OrderService {
     public List<Order> getAllOrders() {
         return orderRepository.findAll();
     }
+
+    public void assignCenter(Order order, String center) {
+        order.setAssignedCenter(center);
+        order.setStatus("ASSIGNED");
+        orderRepository.save(order);
+    }
 }

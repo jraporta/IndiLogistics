@@ -77,4 +77,9 @@ public class CenterService {
             throw new InvalidCenterCreationDataException("There is already a logistics center in that position.");
         }
     }
+
+    public void increaseCurrentLoad(Center center) {
+        center.setCurrentLoad(center.getCurrentLoad() + 1);
+        centerRepository.save(center);
+    }
 }
