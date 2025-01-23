@@ -8,11 +8,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(InvalidCapacityException.class)
-    public ResponseEntity<String> InvalidCapacityHandler(InvalidCapacityException ex) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
-    }
-
     @ExceptionHandler(InvalidCenterCreationDataException.class)
     public ResponseEntity<String> InvalidCenterDataHandler(InvalidCenterCreationDataException ex) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
