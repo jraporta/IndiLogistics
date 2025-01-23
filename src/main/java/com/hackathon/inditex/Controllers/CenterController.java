@@ -7,10 +7,7 @@ import com.hackathon.inditex.Services.CenterService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +26,12 @@ public class CenterController {
     @GetMapping("/api/centers")
     public ResponseEntity<List<Center>> getAllCenters(){
         return ResponseEntity.ok(centerService.getAllCenters());
+    }
+
+    @DeleteMapping("api/centers/{id}")
+    public ResponseEntity<MessageResponse> deleteCenter(@PathVariable Long id){
+        centerService.deleteCenter(id);
+        return ResponseEntity.ok(new MessageResponse("Logistics center deleted successfully."));
     }
 
 }

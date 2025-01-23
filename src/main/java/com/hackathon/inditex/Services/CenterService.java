@@ -3,6 +3,7 @@ package com.hackathon.inditex.Services;
 import com.hackathon.inditex.DTO.CreateCenterData;
 import com.hackathon.inditex.Entities.Capacity;
 import com.hackathon.inditex.Entities.Center;
+import com.hackathon.inditex.Exceptions.CenterNotExistsException;
 import com.hackathon.inditex.Exceptions.InvalidCenterCreationDataException;
 import com.hackathon.inditex.Repositories.CenterRepository;
 import lombok.AllArgsConstructor;
@@ -37,5 +38,16 @@ public class CenterService {
 
     public List<Center> getAllCenters() {
         return centerRepository.findAll();
+    }
+
+    public void deleteCenter(Long id) {
+        InterruptIfNotExists(id);
+        centerRepository.deleteById(id);
+    }
+
+    private void InterruptIfNotExists(Long id) {
+        if (!centerRepository.existsById(id)) {
+            throw new CenterNotExistsException("Center not found.");
+        }
     }
 }
