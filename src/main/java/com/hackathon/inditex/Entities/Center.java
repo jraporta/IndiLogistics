@@ -1,5 +1,6 @@
 package com.hackathon.inditex.Entities;
 
+import com.hackathon.inditex.Exceptions.InvalidCenterCreationDataException;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,4 +24,11 @@ public class Center {
 
     @Embedded
     private Coordinates coordinates;
+
+    public void setCurrentLoad(Integer currentLoad) {
+        if (currentLoad > this.getMaxCapacity()) {
+            throw new InvalidCenterCreationDataException("Current load cannot exceed max capacity.");
+        }
+        this.currentLoad = currentLoad;
+    }
 }

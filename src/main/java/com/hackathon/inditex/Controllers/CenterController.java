@@ -28,6 +28,12 @@ public class CenterController {
         return ResponseEntity.ok(centerService.getAllCenters());
     }
 
+    @PatchMapping("api/centers/{id}")
+    public ResponseEntity<MessageResponse> updateCenter(@PathVariable Long id, @RequestBody CreateCenterData data){
+        centerService.updateCenter(id, data);
+        return ResponseEntity.ok(new MessageResponse("Logistics center updated successfully."));
+    }
+
     @DeleteMapping("api/centers/{id}")
     public ResponseEntity<MessageResponse> deleteCenter(@PathVariable Long id){
         centerService.deleteCenter(id);
