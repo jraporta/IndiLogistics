@@ -1,4 +1,4 @@
-package com.hackathon.inditex.services;
+package com.hackathon.inditex.services.implementations;
 
 import com.hackathon.inditex.entities.Coordinates;
 

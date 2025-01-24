@@ -2,34 +2,13 @@ package com.hackathon.inditex.services;
 
 import com.hackathon.inditex.dto.CreateOrderData;
 import com.hackathon.inditex.entities.Order;
-import com.hackathon.inditex.repositories.OrderRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-@AllArgsConstructor
-public class OrderService {
+public interface OrderService {
 
-    private OrderRepository orderRepository;
+    Order createOrder(CreateOrderData data);
+    List<Order> getAllOrders();
+    void assignCenter(Order order, String center);
 
-    public Order createOrder(CreateOrderData data) {
-        Order order = new Order();
-        order.setCustomerId(data.getCustomerId());
-        order.setSize(data.getSize());
-        order.setStatus("PENDING");
-        order.setCoordinates(data.getCoordinates());
-        return orderRepository.save(order);
-    }
-
-    public List<Order> getAllOrders() {
-        return orderRepository.findAll();
-    }
-
-    public void assignCenter(Order order, String center) {
-        order.setAssignedCenter(center);
-        order.setStatus("ASSIGNED");
-        orderRepository.save(order);
-    }
 }
