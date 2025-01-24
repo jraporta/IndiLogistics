@@ -19,17 +19,15 @@ public class OrderProcessingService {
     public List<OrderProcessingDetails> processOrders() {
         List<OrderProcessingDetails> processedOrdersDetails = new ArrayList<>();
         orderService.getAllOrders().stream()
-                .filter(order -> order.getStatus().equals("PENDING"))
-                .sorted((o1, o2) -> Long.compare(o1.getId(), o2.getId()))
-                .forEach(order -> {
-                    processedOrdersDetails.add(processOrder(order));
-                });
+                .filter(order -> "PENDING".equalsIgnoreCase(order.getStatus()))
+                .sorted(Comparator.comparingLong(Order::getId))
+                .forEach(order -> processedOrdersDetails.add(processOrder(order)));
         return processedOrdersDetails;
     }
 
     private OrderProcessingDetails processOrder(Order order) {
         List<Center> availableCenters = centerService.getAllCenters().stream()
-                .filter(center -> center.getStatus().equalsIgnoreCase("AVAILABLE"))
+                .filter(center -> "AVAILABLE".equalsIgnoreCase(center.getStatus()))
                 .toList();
 
         if (availableCenters.isEmpty()) {
@@ -37,7 +35,8 @@ public class OrderProcessingService {
         }
 
         availableCenters = availableCenters.stream()
-                .filter(center -> center.getCapacity().toUpperCase().contains(order.getSize().toUpperCase()))
+                .filter(center -> center.getCapacity().toUpperCase(Locale.US)
+                        .contains(order.getSize().toUpperCase(Locale.US)))
                 .toList();
 
         if (availableCenters.isEmpty()) {

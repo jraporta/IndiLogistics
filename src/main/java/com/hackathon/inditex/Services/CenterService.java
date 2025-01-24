@@ -5,6 +5,7 @@ import com.hackathon.inditex.Entities.Capacity;
 import com.hackathon.inditex.Entities.Center;
 import com.hackathon.inditex.Exceptions.CenterNotExistsException;
 import com.hackathon.inditex.Exceptions.InvalidCenterCreationDataException;
+import com.hackathon.inditex.Exceptions.InvalidCenterUpdateDataException;
 import com.hackathon.inditex.Repositories.CenterRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -54,12 +55,25 @@ public class CenterService {
     }
 
     private void updateFirstCenterParameter(Center center, CreateCenterData data) {
-        if (updateParameter(data::getName, center::setName)) return;
-        if (updateParameter(data::getCapacity, center::setCapacity)) return;
-        if (updateParameter(data::getStatus, center::setStatus)) return;
-        if (updateParameter(data::getCoordinates, center::setCoordinates)) return;
-        if (data.getMaxCapacity() >0 && updateParameter(data::getMaxCapacity, center::setMaxCapacity)) return;
-        if (updateParameter(data::getCurrentLoad, center::setCurrentLoad)) return;
+        if (updateParameter(data::getName, center::setName)) {
+            return;
+        }
+        if (updateParameter(data::getCapacity, center::setCapacity)) {
+            return;
+        }
+        if (updateParameter(data::getStatus, center::setStatus)) {
+            return;
+        }
+        if (updateParameter(data::getCoordinates, center::setCoordinates)) {
+            return;
+        }
+        if (data.getMaxCapacity() >0 && updateParameter(data::getMaxCapacity, center::setMaxCapacity)) {
+            return;
+        }
+        if (updateParameter(data::getCurrentLoad, center::setCurrentLoad)) {
+            return;
+        }
+        throw new InvalidCenterUpdateDataException("Invalid data provided: the center couldn't be updated");
     }
 
     private <T> boolean updateParameter(Supplier<T> getter, Consumer<T> setter) {

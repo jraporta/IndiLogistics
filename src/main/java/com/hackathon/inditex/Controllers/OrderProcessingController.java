@@ -14,7 +14,7 @@ public class OrderProcessingController {
     private OrderProcessingService orderProcessingService;
 
     @PostMapping("/api/orders/order-assignations")
-    private ResponseEntity<ProcessedOrdersResponse> processOrders(){
+    public ResponseEntity<ProcessedOrdersResponse> processOrders(){
         ProcessedOrdersResponse response = new ProcessedOrdersResponse(orderProcessingService.processOrders());
         return ResponseEntity.ok(response);
     }

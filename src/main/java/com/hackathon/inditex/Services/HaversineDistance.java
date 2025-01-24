@@ -3,9 +3,12 @@ package com.hackathon.inditex.Services;
 import com.hackathon.inditex.Entities.Coordinates;
 
 
-public class HaversineDistance {
+public final class HaversineDistance {
 
     private static final double EARTH_RADIUS_KM = 6371.0;
+
+    private HaversineDistance() {
+    }
 
     public static double calculateDistance(Coordinates c1, Coordinates c2) {
         return haversine(c1.getLatitude(), c1.getLongitude(), c2.getLatitude(), c2.getLongitude());
