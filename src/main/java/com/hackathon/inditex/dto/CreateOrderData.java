@@ -1,6 +1,6 @@
-package com.hackathon.inditex.DTO;
+package com.hackathon.inditex.dto;
 
-import com.hackathon.inditex.Entities.Coordinates;
+import com.hackathon.inditex.entities.Coordinates;
 import lombok.Data;
 
 @Data

@@ -1,9 +1,9 @@
-package com.hackathon.inditex.Controllers;
+package com.hackathon.inditex.controllers;
 
-import com.hackathon.inditex.DTO.CreateCenterData;
-import com.hackathon.inditex.DTO.MessageResponse;
-import com.hackathon.inditex.Entities.Center;
-import com.hackathon.inditex.Services.CenterService;
+import com.hackathon.inditex.dto.CreateCenterData;
+import com.hackathon.inditex.dto.MessageResponse;
+import com.hackathon.inditex.entities.Center;
+import com.hackathon.inditex.services.CenterService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

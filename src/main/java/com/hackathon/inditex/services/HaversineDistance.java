@@ -1,6 +1,6 @@
-package com.hackathon.inditex.Services;
+package com.hackathon.inditex.services;
 
-import com.hackathon.inditex.Entities.Coordinates;
+import com.hackathon.inditex.entities.Coordinates;
 
 
 public final class HaversineDistance {

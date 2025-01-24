@@ -1,4 +1,4 @@
-package com.hackathon.inditex.DTO;
+package com.hackathon.inditex.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

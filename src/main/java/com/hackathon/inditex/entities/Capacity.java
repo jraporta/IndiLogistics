@@ -1,4 +1,4 @@
-package com.hackathon.inditex.Entities;
+package com.hackathon.inditex.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,6 +1,6 @@
-package com.hackathon.inditex.Exceptions;
+package com.hackathon.inditex.exceptions;
 
-import com.hackathon.inditex.DTO.MessageResponse;
+import com.hackathon.inditex.dto.MessageResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

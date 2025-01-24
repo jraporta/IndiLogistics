@@ -1,4 +1,4 @@
-package com.hackathon.inditex.Exceptions;
+package com.hackathon.inditex.exceptions;
 
 public class InvalidCenterUpdateDataException extends RuntimeException{
 

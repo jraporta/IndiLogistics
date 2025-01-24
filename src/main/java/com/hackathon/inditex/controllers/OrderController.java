@@ -1,9 +1,9 @@
-package com.hackathon.inditex.Controllers;
+package com.hackathon.inditex.controllers;
 
-import com.hackathon.inditex.DTO.CreateOrderData;
-import com.hackathon.inditex.DTO.CreateOrderResponse;
-import com.hackathon.inditex.Entities.Order;
-import com.hackathon.inditex.Services.OrderService;
+import com.hackathon.inditex.dto.CreateOrderData;
+import com.hackathon.inditex.dto.CreateOrderResponse;
+import com.hackathon.inditex.entities.Order;
+import com.hackathon.inditex.services.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

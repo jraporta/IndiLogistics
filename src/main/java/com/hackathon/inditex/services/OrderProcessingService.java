@@ -1,9 +1,9 @@
-package com.hackathon.inditex.Services;
+package com.hackathon.inditex.services;
 
-import com.hackathon.inditex.Entities.Center;
-import com.hackathon.inditex.Entities.Order;
-import com.hackathon.inditex.Entities.OrderProcessingDetails;
-import com.hackathon.inditex.Entities.OrderProcessingDetailsWithMessage;
+import com.hackathon.inditex.entities.Center;
+import com.hackathon.inditex.entities.Order;
+import com.hackathon.inditex.entities.OrderProcessingDetails;
+import com.hackathon.inditex.entities.OrderProcessingDetailsWithMessage;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

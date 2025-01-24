@@ -1,12 +1,12 @@
-package com.hackathon.inditex.Services;
+package com.hackathon.inditex.services;
 
-import com.hackathon.inditex.DTO.CreateCenterData;
-import com.hackathon.inditex.Entities.Capacity;
-import com.hackathon.inditex.Entities.Center;
-import com.hackathon.inditex.Exceptions.CenterNotExistsException;
-import com.hackathon.inditex.Exceptions.InvalidCenterCreationDataException;
-import com.hackathon.inditex.Exceptions.InvalidCenterUpdateDataException;
-import com.hackathon.inditex.Repositories.CenterRepository;
+import com.hackathon.inditex.dto.CreateCenterData;
+import com.hackathon.inditex.entities.Capacity;
+import com.hackathon.inditex.entities.Center;
+import com.hackathon.inditex.exceptions.CenterNotExistsException;
+import com.hackathon.inditex.exceptions.InvalidCenterCreationDataException;
+import com.hackathon.inditex.exceptions.InvalidCenterUpdateDataException;
+import com.hackathon.inditex.repositories.CenterRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;

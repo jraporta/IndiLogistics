@@ -1,8 +1,8 @@
-package com.hackathon.inditex.Services;
+package com.hackathon.inditex.services;
 
-import com.hackathon.inditex.DTO.CreateOrderData;
-import com.hackathon.inditex.Entities.Order;
-import com.hackathon.inditex.Repositories.OrderRepository;
+import com.hackathon.inditex.dto.CreateOrderData;
+import com.hackathon.inditex.entities.Order;
+import com.hackathon.inditex.repositories.OrderRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

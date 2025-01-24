@@ -1,6 +1,6 @@
-package com.hackathon.inditex.Entities;
+package com.hackathon.inditex.entities;
 
-import com.hackathon.inditex.Exceptions.InvalidCenterCreationDataException;
+import com.hackathon.inditex.exceptions.InvalidCenterCreationDataException;
 import jakarta.persistence.*;
 import lombok.Data;
 
