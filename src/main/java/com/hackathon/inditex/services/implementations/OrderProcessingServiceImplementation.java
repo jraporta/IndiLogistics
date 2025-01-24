@@ -21,18 +21,21 @@ public class OrderProcessingServiceImplementation implements OrderProcessingServ
 
     @Override
     public List<OrderProcessingDetails> processOrders() {
-        List<OrderProcessingDetails> processedOrdersDetails = new ArrayList<>();
-        orderService.getAllOrders().stream()
-                .filter(order -> "PENDING".equalsIgnoreCase(order.getStatus()))
+
+        List<Center> availableCenters = getAvailableCenters();
+
+        return orderService.getAllOrders().stream()
+                .filter(this::isPendingOrder)
                 .sorted(Comparator.comparingLong(Order::getId))
-                .forEach(order -> processedOrdersDetails.add(processOrder(order)));
-        return processedOrdersDetails;
+                .map(order -> processSingleOrder(order, availableCenters))
+                .toList();
     }
 
-    private OrderProcessingDetails processOrder(Order order) {
-        List<Center> availableCenters = centerService.getAllCenters().stream()
-                .filter(center -> "AVAILABLE".equalsIgnoreCase(center.getStatus()))
-                .toList();
+    private boolean isPendingOrder(Order order) {
+        return "PENDING".equalsIgnoreCase(order.getStatus());
+    }
+
+    private OrderProcessingDetails processSingleOrder(Order order, List<Center> availableCenters) {
 
         if (availableCenters.isEmpty()) {
             return processUnassignedOrder(order, "There are no available centers.");
@@ -62,6 +65,13 @@ public class OrderProcessingServiceImplementation implements OrderProcessingServ
 
         return processAssignedOrder(closestCenter, order);
 
+    }
+
+    private List<Center> getAvailableCenters() {
+        List<Center> availableCenters = centerService.getAllCenters().stream()
+                .filter(center -> "AVAILABLE".equalsIgnoreCase(center.getStatus()))
+                .toList();
+        return availableCenters;
     }
 
     private OrderProcessingDetails processUnassignedOrder(Order order, String message) {
