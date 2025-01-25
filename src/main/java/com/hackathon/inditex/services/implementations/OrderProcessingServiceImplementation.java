@@ -41,37 +41,48 @@ public class OrderProcessingServiceImplementation implements OrderProcessingServ
             return processUnassignedOrder(order, "There are no available centers.");
         }
 
-        availableCenters = availableCenters.stream()
-                .filter(center -> center.getCapacity().toUpperCase(Locale.US)
-                        .contains(order.getSize().toUpperCase(Locale.US)))
-                .toList();
+        List<Center> filteredCenters = filterByOrderType(order, availableCenters);
 
-        if (availableCenters.isEmpty()) {
+        if (filteredCenters.isEmpty()) {
             return processUnassignedOrder(order, "No available centers support the order type.");
         }
 
-        availableCenters = availableCenters.stream()
-                .filter(center -> center.getCurrentLoad() < center.getMaxCapacity())
-                .toList();
+        filteredCenters = filterByCapacity(filteredCenters);
 
-        if (availableCenters.isEmpty()) {
+        if (filteredCenters.isEmpty()) {
             return processUnassignedOrder(order, "All centers are at maximum capacity.");
         }
 
-        Center closestCenter = availableCenters.stream()
-                .min(Comparator.comparingDouble(c ->
-                        HaversineDistance.calculateDistance(c.getCoordinates(), order.getCoordinates())))
-                .get();
+        Center closestCenter = getClosestCenter(order, filteredCenters);
 
         return processAssignedOrder(closestCenter, order);
 
     }
 
+    private static Center getClosestCenter(Order order, List<Center> centers) {
+        return centers.stream()
+                .min(Comparator.comparingDouble(c ->
+                        HaversineDistance.calculateDistance(c.getCoordinates(), order.getCoordinates())))
+                .get();
+    }
+
+    private static List<Center> filterByCapacity(List<Center> availableCenters) {
+        return availableCenters.stream()
+                .filter(center -> center.getCurrentLoad() < center.getMaxCapacity())
+                .toList();
+    }
+
+    private static List<Center> filterByOrderType(Order order, List<Center> availableCenters) {
+        return availableCenters.stream()
+                .filter(center -> center.getCapacity().toUpperCase(Locale.US)
+                        .contains(order.getSize().toUpperCase(Locale.US)))
+                .toList();
+    }
+
     private List<Center> getAvailableCenters() {
-        List<Center> availableCenters = centerService.getAllCenters().stream()
+        return centerService.getAllCenters().stream()
                 .filter(center -> "AVAILABLE".equalsIgnoreCase(center.getStatus()))
                 .toList();
-        return availableCenters;
     }
 
     private OrderProcessingDetails processUnassignedOrder(Order order, String message) {
