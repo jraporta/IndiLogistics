@@ -7,6 +7,7 @@ import com.hackathon.inditex.entities.OrderProcessingDetailsWithMessage;
 import com.hackathon.inditex.services.CenterService;
 import com.hackathon.inditex.services.OrderProcessingService;
 import com.hackathon.inditex.services.OrderService;
+import com.hackathon.inditex.utils.DistanceCalculator;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class OrderProcessingServiceImplementation implements OrderProcessingServ
 
     private CenterService centerService;
     private OrderService orderService;
+    private DistanceCalculator distanceCalculator;
 
     @Override
     public List<OrderProcessingDetails> processOrders() {
@@ -59,20 +61,20 @@ public class OrderProcessingServiceImplementation implements OrderProcessingServ
 
     }
 
-    private static Center getClosestCenter(Order order, List<Center> centers) {
+    private Center getClosestCenter(Order order, List<Center> centers) {
         return centers.stream()
                 .min(Comparator.comparingDouble(c ->
-                        HaversineDistance.calculateDistance(c.getCoordinates(), order.getCoordinates())))
+                        distanceCalculator.calculateDistance(c.getCoordinates(), order.getCoordinates())))
                 .get();
     }
 
-    private static List<Center> filterByCapacity(List<Center> availableCenters) {
+    private List<Center> filterByCapacity(List<Center> availableCenters) {
         return availableCenters.stream()
                 .filter(center -> center.getCurrentLoad() < center.getMaxCapacity())
                 .toList();
     }
 
-    private static List<Center> filterByOrderType(Order order, List<Center> availableCenters) {
+    private List<Center> filterByOrderType(Order order, List<Center> availableCenters) {
         return availableCenters.stream()
                 .filter(center -> center.getCapacity().toUpperCase(Locale.US)
                         .contains(order.getSize().toUpperCase(Locale.US)))
@@ -104,7 +106,7 @@ public class OrderProcessingServiceImplementation implements OrderProcessingServ
 
     private OrderProcessingDetails createDetails(Order order, Center center) {
         OrderProcessingDetails details = new OrderProcessingDetails();
-        details.setDistance(HaversineDistance.calculateDistance(center.getCoordinates(), order.getCoordinates()));
+        details.setDistance(distanceCalculator.calculateDistance(center.getCoordinates(), order.getCoordinates()));
         details.setOrderId(order.getId());
         details.setAssignedLogisticsCenter(center.getName());
         details.setStatus(order.getStatus());

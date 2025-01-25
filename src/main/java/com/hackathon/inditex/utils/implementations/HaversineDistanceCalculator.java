@@ -1,16 +1,15 @@
-package com.hackathon.inditex.services.implementations;
+package com.hackathon.inditex.utils.implementations;
 
 import com.hackathon.inditex.entities.Coordinates;
+import com.hackathon.inditex.utils.DistanceCalculator;
 
 
-public final class HaversineDistance {
+public class HaversineDistanceCalculator implements DistanceCalculator {
 
     private static final double EARTH_RADIUS_KM = 6371.0;
 
-    private HaversineDistance() {
-    }
-
-    public static double calculateDistance(Coordinates c1, Coordinates c2) {
+    @Override
+    public double calculateDistance(Coordinates c1, Coordinates c2) {
         return haversine(c1.getLatitude(), c1.getLongitude(), c2.getLatitude(), c2.getLongitude());
     }
 
